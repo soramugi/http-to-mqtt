@@ -1,0 +1,11 @@
+{
+  "env": {
+    "AUTH_USER": "",
+    "AUTH_PASS": "",
+    "MQTT_TOPIC": "",
+    "MQTT_HOST": "",
+    "MQTT_PORT": "",
+    "MQTT_USERNAME": "",
+    "MQTT_PASSWORD": ""
+  }
+}
