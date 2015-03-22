@@ -15,7 +15,7 @@ get '/:path' do
   topic   = ENV['MQTT_TOPIC'] || params[:topic]
   opt = {
     host: ENV['MQTT_HOST'],
-    port: ENV['MQTT_PORT'].nil? ? 1883 : ENV['PORT'].to_i,
+    port: ENV['MQTT_PORT'].nil? ? 1883 : ENV['MQTT_PORT'].to_i,
     username: ENV['MQTT_USERNAME'],
     password: ENV['MQTT_PASSWORD']
   }
