@@ -11,15 +11,16 @@ end
 get '/:path' do
   return status 400 unless auth?(params[:username], params[:path])
 
-  message = ENV['MQTT_MESSAGE'] || params[:message] || 1
-  topic   = ENV['MQTT_TOPIC'] || params[:topic]
-  opt = {
-    host: ENV['MQTT_HOST'],
-    port: ENV['MQTT_PORT'].nil? ? 1883 : ENV['MQTT_PORT'].to_i,
-    username: ENV['MQTT_USERNAME'],
-    password: ENV['MQTT_PASSWORD']
+  uri = URI.parse ENV['CLOUDMQTT_URL'] || 'mqtt://localhost:1883'
+  conn_opts = {
+    remote_host: uri.host,
+    remote_port: uri.port,
+    username: uri.user,
+    password: uri.password,
   }
-  MQTT::Client.connect(opt) do |c|
+  message = ENV['MQTT_MESSAGE'] || params[:message] || 1
+  topic   = ENV['MQTT_TOPIC'] || params[:topic] || 'http'
+  MQTT::Client.connect(conn_opts) do |c|
     c.publish(topic, message)
   end
 end
